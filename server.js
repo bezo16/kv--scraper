@@ -180,14 +180,14 @@ let counter = 0
 
 
 async function CaitanyaCaritamrta() {
-    
+
+  
   let logStream = fs.createWriteStream(`./CC/CC-${language}-${books[selector]}.json`, {flags: 'a'});
-  const $ = await fetchHTML(`https://vedabase.io/${language}/library/cc/${books[0]}/${counter + 1}/`)
+  const $ = await fetchHTML(`https://vedabase.io/${language}/library/cc/${books[selector]}/${counter + 1}/`)
   if(counter === 0)logStream.write(`[`);
   logStream.write(`[\n`);
   
   let length = $('dl').length 
-  console.log(length)
   
   $('dl').each(function (i, elm) {
       let text = $(elm).find('dd').text()
@@ -196,21 +196,31 @@ async function CaitanyaCaritamrta() {
       if(num.includes('-')) {
           let num1 = num.split(' ')[1]
           let num2 = num.split(' ')[3]
+          if(books[selector] !== 'adi') num1 = num.split(' ')[1].split('-')[0]
+          if(books[selector] !== 'adi') num2 = num.split(' ')[1].split('-')[1]
           num2 = num2.slice(0,num2.length - 1)
           for(let j = 0;j < (num2 - num1); j++) {
               logStream.write(result + '\n');
           }
       } 
-      if(i === length - 1) result = `"${text}"],`
+      if(counter === chapters[selector] - 1 && i === length - 1) result = `"${text}"]]`
+      else if(i === length - 1) result = `"${text}"],`
       logStream.write(result + '\n');
-
-
-      if(counter !== chapters[selector] - 1) {
-        counter++
-        CaitanyaCaritamrta()
-      }
-
         });
+
+
+        if(counter !== chapters[selector] - 1) {
+          console.log(`https://vedabase.io/${language}/library/cc/${books[selector]}/${counter + 1}/`)
+          counter++
+          CaitanyaCaritamrta()
+        } else {
+          counter = 0
+          if(books[selector] === 'antya') console.log('rip')
+          else {
+            selector++
+            CaitanyaCaritamrta()
+          } 
+          }
    
         
   }
