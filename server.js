@@ -1,19 +1,11 @@
 const fs = require('fs')
 const cheerio = require('cheerio')
 const axios = require('axios')
-// CONFIGS
 
 async function fetchHTML(url) {
     const { data } = await axios.get(url)
     return cheerio.load(data)
   }
-
-
-
-
-
-
-
 
 
 
@@ -169,7 +161,15 @@ async function BhagavadGita() {
 
 
 
-
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
+// CRITAYNJA CARITAMRTA
 
 
 
