@@ -107,51 +107,51 @@ async function fetchHTML(url) {
 
 
 // CONFIG
-let language = 'cs'
+// let language = 'cs'
 
 
 
-let counter = 0
-let chapters = 18
-// let quotes = [46,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78] 
+// let counter = 0
+// let chapters = 18
+// // let quotes = [46,72,43,42,29,47,30,28,34,42,55,20,35,27,20,24,28,78] 
 
-async function BhagavadGita() {
+// async function BhagavadGita() {
     
-    let logStream = fs.createWriteStream(`./bhagavad-gita/BG-${language}.json`, {flags: 'a'});
-    const $ = await fetchHTML(`https://vedabase.io/${language}/library/bg/${counter + 1}/`)
-    if(counter === 0)logStream.write(`[`);
-    logStream.write(`[\n`);
+//     let logStream = fs.createWriteStream(`./bhagavad-gita/BG-${language}.json`, {flags: 'a'});
+//     const $ = await fetchHTML(`https://vedabase.io/${language}/library/bg/${counter + 1}/`)
+//     if(counter === 0)logStream.write(`[`);
+//     logStream.write(`[\n`);
     
-    let length = $('dl').length 
+//     let length = $('dl').length 
     
-    $('dl').each(function (i, elm) {
-        let text = $(elm).find('dd').text()
-        let num = $(elm).find('dt a').text()
-        let result = `"${text}",`
-        if(num.includes('-')) {
-            let num1 = num.split(' ')[1].split('-')[0]
-            let num2 = num.split(' ')[1].split('-')[1]
-            num2 = num2.slice(0,num2.length - 1)
-            for(let j = 0;j < (num2 - num1); j++) {
-                logStream.write(result + '\n');
-            }
-        } 
-        if(i === length - 1) result = `"${text}"`
-        logStream.write(result + '\n');
-          });
-          if(counter != chapters - 1) {
-              logStream.write(`],\n\n`);
-              counter++
-              BhagavadGita()
-            } else {
-              logStream.write(`]\n`);
-              logStream.write(`]`);
+//     $('dl').each(function (i, elm) {
+//         let text = $(elm).find('dd').text()
+//         let num = $(elm).find('dt a').text()
+//         let result = `"${text}",`
+//         if(num.includes('-')) {
+//             let num1 = num.split(' ')[1].split('-')[0]
+//             let num2 = num.split(' ')[1].split('-')[1]
+//             num2 = num2.slice(0,num2.length - 1)
+//             for(let j = 0;j < (num2 - num1); j++) {
+//                 logStream.write(result + '\n');
+//             }
+//         } 
+//         if(i === length - 1) result = `"${text}"`
+//         logStream.write(result + '\n');
+//           });
+//           if(counter != chapters - 1) {
+//               logStream.write(`],\n\n`);
+//               counter++
+//               BhagavadGita()
+//             } else {
+//               logStream.write(`]\n`);
+//               logStream.write(`]`);
 
-          }
+//           }
      
           
-    }
-    BhagavadGita()
+//     }
+//     BhagavadGita()
 
 
 
@@ -172,5 +172,46 @@ async function BhagavadGita() {
 // CRITAYNJA CARITAMRTA
 
 
+let language = 'cs'
+let books = ['adi','madhya','antya']
+let chapters = [17,25,20]
+let selector = 0
+let counter = 0
 
 
+async function CaitanyaCaritamrta() {
+    
+  let logStream = fs.createWriteStream(`./CC/CC-${language}-${books[selector]}.json`, {flags: 'a'});
+  const $ = await fetchHTML(`https://vedabase.io/${language}/library/cc/${books[0]}/${counter + 1}/`)
+  if(counter === 0)logStream.write(`[`);
+  logStream.write(`[\n`);
+  
+  let length = $('dl').length 
+  console.log(length)
+  
+  $('dl').each(function (i, elm) {
+      let text = $(elm).find('dd').text()
+      let num = $(elm).find('dt a').text()
+      let result = `"${text}",`
+      if(num.includes('-')) {
+          let num1 = num.split(' ')[1]
+          let num2 = num.split(' ')[3]
+          num2 = num2.slice(0,num2.length - 1)
+          for(let j = 0;j < (num2 - num1); j++) {
+              logStream.write(result + '\n');
+          }
+      } 
+      if(i === length - 1) result = `"${text}"],`
+      logStream.write(result + '\n');
+
+
+      if(counter !== chapters[selector] - 1) {
+        counter++
+        CaitanyaCaritamrta()
+      }
+
+        });
+   
+        
+  }
+  CaitanyaCaritamrta()
