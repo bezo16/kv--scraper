@@ -106,8 +106,8 @@ async function fetchHTML(url) {
 
 
 
-// CONFIG
-// let language = 'cs'
+// CONFIG  
+// let language = 'sk'
 
 
 
@@ -128,16 +128,37 @@ async function fetchHTML(url) {
 //         let text = $(elm).find('dd').text()
 //         let num = $(elm).find('dt a').text()
 //         let result = `"${text}",`
-//         if(num.includes('-')) {
+//         console.log(num)
+//         if(num.includes('-') || num.includes('–')) {
+
+
+//           if(num.split(' ').length > 3) {
+
+//             let num1 = num.split(' ')[1]
+//             let num2 = num.split(' ')[3]
+//             num2 = num2.slice(0,num2.length - 1)
+//             console.log('second verzia')
+//             console.log(num1,num2)
+//             for(let j = 0;j < (num2 - num1); j++) {
+//               logStream.write(result + '\n');
+//               console.log(j)
+//             }
+//           } else {
 //             let num1 = num.split(' ')[1].split('-')[0]
 //             let num2 = num.split(' ')[1].split('-')[1]
 //             num2 = num2.slice(0,num2.length - 1)
+//             console.log(num1,num2)
 //             for(let j = 0;j < (num2 - num1); j++) {
-//                 logStream.write(result + '\n');
+//               logStream.write(result + '\n');
+//               console.log(j)
 //             }
+//           }
+
+
+
 //         } 
 //         if(i === length - 1) result = `"${text}"`
-//         logStream.write(result + '\n');
+//         logStream.write(result + '\n'); 
 //           });
 //           if(counter != chapters - 1) {
 //               logStream.write(`],\n\n`);
@@ -172,56 +193,125 @@ async function fetchHTML(url) {
 // CRITAYNJA CARITAMRTA
 
 
-let language = 'cs'
-let books = ['adi','madhya','antya']
-let chapters = [17,25,20]
-let selector = 0
-let counter = 0
+// let language = 'cs'
+// let books = ['adi','madhya','antya']
+// let chapters = [17,25,20]
+// let selector = 0
+// let counter = 0
 
 
-async function CaitanyaCaritamrta() {
+// async function CaitanyaCaritamrta() {
 
   
-  let logStream = fs.createWriteStream(`./CC/CC-${language}-${books[selector]}.json`, {flags: 'a'});
-  const $ = await fetchHTML(`https://vedabase.io/${language}/library/cc/${books[selector]}/${counter + 1}/`)
-  if(counter === 0)logStream.write(`[`);
-  logStream.write(`[\n`);
+//   let logStream = fs.createWriteStream(`./CC/CC-${language}-${books[selector]}.json`, {flags: 'a'});
+//   const $ = await fetchHTML(`https://vedabase.io/${language}/library/cc/${books[selector]}/${counter + 1}/`)
+//   if(counter === 0)logStream.write(`[`);
+//   logStream.write(`[\n`);
   
-  let length = $('dl').length 
+//   let length = $('dl').length 
   
-  $('dl').each(function (i, elm) {
-      let text = $(elm).find('dd').text()
-      let num = $(elm).find('dt a').text()
-      let result = `"${text}",`
-      if(num.includes('-')) {
-          let num1 = num.split(' ')[1]
-          let num2 = num.split(' ')[3]
-          if(books[selector] !== 'adi') num1 = num.split(' ')[1].split('-')[0]
-          if(books[selector] !== 'adi') num2 = num.split(' ')[1].split('-')[1]
-          num2 = num2.slice(0,num2.length - 1)
-          for(let j = 0;j < (num2 - num1); j++) {
-              logStream.write(result + '\n');
-          }
-      } 
-      if(counter === chapters[selector] - 1 && i === length - 1) result = `"${text}"]]`
-      else if(i === length - 1) result = `"${text}"],`
-      logStream.write(result + '\n');
-        });
+//   $('dl').each(function (i, elm) {
+//       let text = $(elm).find('dd').text()
+//       let num = $(elm).find('dt a').text()
+//       let result = `"${text}",`
+//       if(num.includes('-')) {
+//           let num1 = num.split(' ')[1]
+//           let num2 = num.split(' ')[3]
+//           if(books[selector] !== 'adi') num1 = num.split(' ')[1].split('-')[0]
+//           if(books[selector] !== 'adi') num2 = num.split(' ')[1].split('-')[1]
+//           num2 = num2.slice(0,num2.length - 1)
+//           for(let j = 0;j < (num2 - num1); j++) {
+//               logStream.write(result + '\n');
+//           }
+//       } 
+//       if(counter === chapters[selector] - 1 && i === length - 1) result = `"${text}"]]`
+//       else if(i === length - 1) result = `"${text}"],`
+//       logStream.write(result + '\n');
+//         });
 
 
-        if(counter !== chapters[selector] - 1) {
-          console.log(`https://vedabase.io/${language}/library/cc/${books[selector]}/${counter + 1}/`)
-          counter++
-          CaitanyaCaritamrta()
-        } else {
-          counter = 0
-          if(books[selector] === 'antya') console.log('rip')
-          else {
-            selector++
-            CaitanyaCaritamrta()
-          } 
-          }
+//         if(counter !== chapters[selector] - 1) {
+//           console.log(`https://vedabase.io/${language}/library/cc/${books[selector]}/${counter + 1}/`)
+//           counter++
+//           CaitanyaCaritamrta()
+//         } else {
+//           counter = 0
+//           if(books[selector] === 'antya') console.log('rip')
+//           else {
+//             selector++
+//             CaitanyaCaritamrta()
+//           } 
+//           }
    
         
+//   }
+//   CaitanyaCaritamrta()
+
+
+
+
+
+
+
+
+
+
+
+
+// REINKARNACIA SB
+// REINKARNACIA SB
+// REINKARNACIA SB
+// REINKARNACIA SB
+// REINKARNACIA SB
+// REINKARNACIA SB
+// REINKARNACIA SB
+
+
+let counter = 1
+let max = 92
+
+let firstBr = false
+
+
+async function ReinkarnaciaSb() {
+  let logStream = fs.createWriteStream(`./Reinkarnacia/sb.json`, {flags: 'a'});
+  const $ = await fetchHTML(`https://reinkarnacia.sk/citaty-podla-knihy/srimad-bhagavatam/page/${counter}/`)
+
+  if(!firstBr) {
+    logStream.write(`[`)
+    firstBr = true
   }
-  CaitanyaCaritamrta()
+  
+  $('.title').each(function(i, elm) {
+    let quote = $(elm).text().split(' ')[1]
+
+
+
+    if(quote.includes('-')) {
+      logStream.write(`[`)
+      console.log(quote.split('.')[2].split('-')[0])
+
+      for(i = Number(quote.split('.')[2].split('-')[0]); i <= Number(quote.split('.')[2].split('-')[1]) ; i++) {
+        if(i === Number(quote.split('.')[2].split('-')[1])) logStream.write(`"${quote.split('.')[0]}.${quote.split('.')[1]}.${i}"`)
+        else logStream.write(`"${quote.split('.')[0]}.${quote.split('.')[1]}.${i}",`)
+        console.log(`${quote.split('.')[0]}.${quote.split('.')[1]}.${i}`)
+      }
+
+      logStream.write(`],`)
+    }
+
+
+    else {
+      logStream.write(`"${quote}",`);
+    }
+  })
+  
+  
+  counter++
+  if(counter !== max + 1) ReinkarnaciaSb()
+  else logStream.write(`]`)
+          
+}
+        
+  
+  ReinkarnaciaSb()
